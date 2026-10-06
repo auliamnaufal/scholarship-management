@@ -137,13 +137,16 @@
             </div>
 
             <div class="mt-2 space-y-1">
-                <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-slate-300 transition duration-200 hover:translate-x-1 hover:bg-white/5 hover:text-white [&>svg]:transition-transform hover:[&>svg]:scale-110">
-                    <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
-                        <circle cx="12" cy="8" r="3.25" />
-                        <path stroke-linecap="round" d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7" />
-                    </svg>
-                    {{ __('Profile') }}
-                </a>
+                {{-- Students manage account info on the My Biodata page instead, so they don't get two settings pages. --}}
+                @unless (auth()->user()->hasRole('student'))
+                    <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-slate-300 transition duration-200 hover:translate-x-1 hover:bg-white/5 hover:text-white [&>svg]:transition-transform hover:[&>svg]:scale-110">
+                        <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                            <circle cx="12" cy="8" r="3.25" />
+                            <path stroke-linecap="round" d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7" />
+                        </svg>
+                        {{ __('Profile') }}
+                    </a>
+                @endunless
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

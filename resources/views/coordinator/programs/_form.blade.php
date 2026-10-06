@@ -173,7 +173,7 @@
                                 rows="2"
                                 class="mt-1 block w-full rounded-lg border-slate-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             >{{ old("requirements.{$type->id}.instructions", $existing?->instructions) }}</textarea>
-                            <x-input-error :messages="$errors->get("requirements.{$type->id}.instructions")" class="mt-1" />
+                            <x-input-error :messages="$errors->get('requirements.'.$type->id.'.instructions')" class="mt-1" />
                         </div>
                     </div>
                 </div>

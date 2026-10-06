@@ -25,8 +25,7 @@
 
             <x-card>
                 <p class="text-sm text-slate-500">
-                    {{ __('This is the information scholarships are matched against. Your name, email and password live on the') }}
-                    <a href="{{ route('profile.edit') }}" class="font-medium text-indigo-600 hover:underline">{{ __('account page') }}</a>.
+                    {{ __('This is the information scholarships are matched against.') }}
                 </p>
 
                 <form method="POST" action="{{ route('student.biodata.update') }}" class="mt-6">
@@ -40,6 +39,10 @@
                     </div>
                 </form>
             </x-card>
+
+            <x-card class="mt-6">@include('profile.partials.update-profile-information-form')</x-card>
+            <x-card class="mt-6">@include('profile.partials.update-password-form')</x-card>
+            <x-card class="mt-6">@include('profile.partials.delete-user-form')</x-card>
         </div>
     </div>
 </x-app-layout>

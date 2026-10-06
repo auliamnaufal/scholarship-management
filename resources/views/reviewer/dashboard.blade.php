@@ -25,8 +25,10 @@
 
             <div class="bg-white overflow-hidden shadow-soft ring-1 ring-slate-900/5 rounded-xl p-6">
                 <h3 class="text-lg font-medium mb-4">{{ __('Open Applications (claim to review)') }}</h3>
+                <x-search-form :action="route('reviewer.dashboard')" :placeholder="__('Search student or scholarship')"
+                    param="claim_q" :active-params="['claim_q']" />
                 @if ($claimable->isEmpty())
-                    <p class="text-slate-500">{{ __('No applications waiting to be claimed.') }}</p>
+                    <p class="text-slate-500">{{ request()->filled('claim_q') ? __('No applications match your search.') : __('No applications waiting to be claimed.') }}</p>
                 @else
                     <div class="overflow-x-auto"><table class="data-table">
                         <thead>
@@ -64,8 +66,10 @@
 
             <div class="bg-white overflow-hidden shadow-soft ring-1 ring-slate-900/5 rounded-xl p-6">
                 <h3 class="text-lg font-medium mb-4">{{ __('Awaiting Your Review') }}</h3>
+                <x-search-form :action="route('reviewer.dashboard')" :placeholder="__('Search student or scholarship')"
+                    param="review_q" :active-params="['review_q']" />
                 @if ($awaitingMyReview->isEmpty())
-                    <p class="text-slate-500">{{ __('Nothing awaiting your review.') }}</p>
+                    <p class="text-slate-500">{{ request()->filled('review_q') ? __('No applications match your search.') : __('Nothing awaiting your review.') }}</p>
                 @else
                     <div class="overflow-x-auto"><table class="data-table">
                         <thead>
@@ -96,8 +100,13 @@
 
             <div class="bg-white overflow-hidden shadow-soft ring-1 ring-slate-900/5 rounded-xl p-6">
                 <h3 class="text-lg font-medium mb-4">{{ __('All Submissions') }}</h3>
+                <x-search-form :action="route('reviewer.dashboard')" :placeholder="__('Search student or scholarship')"
+                    :active-params="['q', 'status']">
+                    <x-filter-select name="status" :label="__('Status')" :selected="$selectedStatus"
+                        :options="collect($statuses)->mapWithKeys(fn ($st) => [$st->value => $st->label()])" />
+                </x-search-form>
                 @if ($allSubmissions->isEmpty())
-                    <p class="text-slate-500">{{ __('No applications have been submitted yet.') }}</p>
+                    <p class="text-slate-500">{{ request()->query() ? __('No applications match your search.') : __('No applications have been submitted yet.') }}</p>
                 @else
                     <div class="overflow-x-auto"><table class="data-table">
                         <thead>

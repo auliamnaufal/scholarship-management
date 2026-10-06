@@ -3,6 +3,12 @@ import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+    // 'class' instead of the default 'media': nothing in this app toggles a
+    // `dark` class, so this is really "never dark" — without it, Laravel's
+    // stock pagination view (the only place with dark: classes) renders as a
+    // jarring dark pill whenever the OS is in dark mode, since no other part
+    // of the app has dark-mode styling to match.
+    darkMode: 'class',
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',

@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 /**
- * The student's own biodata: academic details, contact, family circumstances
- * and the bank account an award is paid into. Separate from Breeze's profile
- * page, which handles the login credentials.
+ * The student's own "my info" page: academic/financial biodata plus the
+ * account fields (name, email, password, delete account) that Breeze's
+ * profile partials handle for every role — students get them here instead
+ * of on a separate /profile page.
  */
 class BiodataController extends Controller
 {
@@ -21,6 +22,7 @@ class BiodataController extends Controller
         return view('student.biodata.edit', [
             'profile' => Auth::user()->studentProfile,
             'guardianPhones' => Auth::user()->guardianPhones->pluck('phone_number')->all(),
+            'user' => Auth::user(),
         ]);
     }
 
